@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<concrete5-cif version="1.0">
+    <singlepages>
+        <page name="Export Database" path="/dashboard/system/backup/mysqldump" filename="/dashboard/system/backup/mysqldump.php" pagetype="" description="" package="simple_database_export" />
+    </singlepages>
+</concrete5-cif>
