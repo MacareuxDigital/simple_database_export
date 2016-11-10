@@ -7,6 +7,8 @@ Export your MySQL database in Dashboard.
 ```bash
 $ cd ./packages
 $ git clone git@github.com:hissy/addon_mysqldump.git simple_database_export
-$ cd ../
+$ cd simple_database_export
+$ composer install
+$ cd ../../
 $ ./concrete/bin/concrete5 c5:package-install simple_database_export
 ```
