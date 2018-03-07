@@ -3,7 +3,6 @@ namespace Concrete\Package\SimpleDatabaseExport\Controller\SinglePage\Dashboard\
 
 use Concrete\Core\Database\Connection\Connection;
 use Ifsnop\Mysqldump\Mysqldump as IMysqldump;
-use Database;
 
 class Mysqldump extends \Concrete\Core\Page\Controller\DashboardPageController
 {
@@ -56,7 +55,7 @@ class Mysqldump extends \Concrete\Core\Page\Controller\DashboardPageController
             set_time_limit(0);
 
             $options = [
-                'compress' => $this->post('compress'),
+                'compress' => IMysqldump::NONE,
                 'add-drop-table' => ($this->post('add-drop-table')) ? true : false,
                 'single-transaction' => ($this->post('single-transaction')) ? true : false,
                 'lock-tables' => ($this->post('lock-tables')) ? true : false,
