@@ -14,12 +14,12 @@ class Controller extends Package
     /**
      * @var string Required concrete5 version.
      */
-    protected $appVersionRequired = '5.7.5';
+    protected $appVersionRequired = '8.2';
 
     /**
      * @var string Package version.
      */
-    protected $pkgVersion = '0.1';
+    protected $pkgVersion = '0.2';
 
     /**
      * Returns the translated package description.

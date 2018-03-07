@@ -4,10 +4,12 @@
 
     <?php echo $this->controller->token->output('mysqldump')?>
     <fieldset>
+        <?php /* I don't know why but compressing is not works well
         <div class="form-group">
             <?php  echo $form->label('compress', t('Compress')); ?>
             <?php  echo $form->select('compress', $dumpOptions['compress'], $defaultOptions['compress']); ?>
         </div>
+        */ ?>
         <div class="form-group">
             <?php  echo $form->label('add-drop-table', t('Add DROP TABLE')); ?>
             <?php  echo $form->select('add-drop-table', $dumpOptions['add-drop-table'], $defaultOptions['add-drop-table']); ?>

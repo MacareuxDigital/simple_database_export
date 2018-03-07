@@ -1,6 +1,7 @@
 <?php
-namespace Concrete\Package\SimpleDatabaseExport\Controller\SinglePage\Dashboard\System\Backup;
+namespace Concrete\Package\SimpleDatabaseExport\Controller\SinglePage\Dashboard\System\Environment;
 
+use Concrete\Core\Database\Connection\Connection;
 use Concrete\Core\File\Service\File;
 use Ifsnop\Mysqldump\Mysqldump as IMysqldump;
 use Database;
@@ -75,7 +76,7 @@ class Mysqldump extends \Concrete\Core\Page\Controller\DashboardPageController
             );
 
             /** @var File $fileHelper */
-            $fileHelper = Core::make('helper/file');
+            $fileHelper = $this->app->make('helper/file');
             $ext = '.sql';
             switch ($options['compress']) {
                 case IMysqldump::GZIP:
@@ -84,23 +85,30 @@ class Mysqldump extends \Concrete\Core\Page\Controller\DashboardPageController
                 case IMysqldump::BZIP2:
                     $ext = '.sql.bz2';
             }
+            $filename = 'concrete5_dump_' . time() . $ext;
 
-            $downloadfile = $fileHelper->getTemporaryDirectory() . '/mysqldump_' . time() . $ext;
-            $fileHelper->clear($downloadfile);
+//            $downloadfile = $fileHelper->getTemporaryDirectory() . '/mysqldump_' . time() . $ext;
+//            $fileHelper->clear($downloadfile);
 
-            if (file_exists($downloadfile)) {
+//            if (file_exists($downloadfile)) {
                 try {
-                    $conn = Database::get();
+                    header('Content-type: application/octet-stream');
+                    header("Content-Disposition: attachment; filename=\"$filename\"");
+                    header("Pragma: public");
+                    header("Cache-Control: private", false);
+                    header("Content-Transfer-Encoding: binary");
+                    header("Content-Encoding: plainbinary");
+
+                    $conn = $this->app->make(Connection::class);
                     $params = $conn->getParams();
                     $dump = new IMysqldump('mysql:host=' . $params['server'] . ';dbname=' . $params['database'], $params['username'], $params['password'], $options);
-                    $dump->start($downloadfile);
-                    $fileHelper->forceDownload($downloadfile);
+                    $dump->start();
                 } catch (\Exception $e) {
                     $this->error->add($e->getMessage());
                 }
-            }
+//            }
 
-            @unlink($downloadfile);
+//            @unlink($downloadfile);
 
         } else {
             $this->error->add($this->token->getErrorMessage());
