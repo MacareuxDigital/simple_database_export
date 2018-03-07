@@ -7,17 +7,17 @@ use Package;
 class Controller extends Package
 {
     /**
-     * @var string Package handle.
+     * @var string package handle
      */
     protected $pkgHandle = 'simple_database_export';
 
     /**
-     * @var string Required concrete5 version.
+     * @var string required concrete5 version
      */
     protected $appVersionRequired = '8.2';
 
     /**
-     * @var string Package version.
+     * @var string package version
      */
     protected $pkgVersion = '0.2';
 
@@ -48,7 +48,7 @@ class Controller extends Package
     {
         $this->registerAutoload();
     }
-    
+
     /**
      * Register autoloader.
      */
@@ -56,7 +56,7 @@ class Controller extends Package
     {
         require $this->getPackagePath() . '/vendor/autoload.php';
     }
-    
+
     /**
      * Install process of the package.
      */
