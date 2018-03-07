@@ -93,6 +93,7 @@ class Mysqldump extends \Concrete\Core\Page\Controller\DashboardPageController
                 $params = $conn->getParams();
                 $dump = new IMysqldump('mysql:host=' . $params['server'] . ';dbname=' . $params['database'], $params['username'], $params['password'], $options);
                 $dump->start();
+                $this->app->shutdown();
             } catch (\Exception $e) {
                 $this->error->add($e->getMessage());
             }
